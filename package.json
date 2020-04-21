@@ -1,7 +1,7 @@
 {
   "name": "@feathers-weapp/client",
-  "version": "0.1.3",
-  "description": "adapts feathers client for weapp",
+  "version": "0.1.0",
+  "description": "adapts feathers client for wechat mini-program",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",
@@ -37,12 +37,16 @@
     "eslint-plugin-node": "^11.1.0",
     "jest-cli": "^25.4.0",
     "rollup": "^2.6.1",
-    "rollup-plugin-babel": "^4.4.0"
+    "rollup-plugin-babel": "^4.4.0",
+    "weapp-fetch": "^0.1.0"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
+  "browserslist": [
+    "> 1%, last 2 versions"
+  ],
   "babel": {
     "presets": [
       "@babel/preset-env"
