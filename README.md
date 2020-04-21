@@ -1,6 +1,6 @@
-## The [feathersjs](https://github.com/feathersjs) client binding for 微信小程序
+## To adapts feathers rest client for wechat mini-program 微信小程序
 
-[![Build Status](https://travis-ci.org/xixilive/feathers-weapp.svg?branch=master)](https://travis-ci.org/xixilive/feathers-weapp)
+[![Build Status](https://travis-ci.org/xixilive/feathers-client-weapp.svg?branch=master)](https://travis-ci.org/xixilive/feathers-client-weapp)
 ![npm (scoped)](https://img.shields.io/npm/v/@feathers-weapp/client)
 
 ## Install

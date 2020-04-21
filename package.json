@@ -1,7 +1,7 @@
 {
   "name": "@feathers-weapp/client",
   "version": "0.1.0",
-  "description": "adapts feathers client for wechat mini-program",
+  "description": "adapts feathers rest client for wechat mini-program",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",
@@ -14,9 +14,11 @@
     "url": "git+ssh://git@github.com/xixilive/feathers-client-weapp.git"
   },
   "keywords": [
-    "feathers",
+    "feathers js",
     "client",
-    "weapp"
+    "wechat",
+    "微信",
+    "微信小程序"
   ],
   "author": "xixilive@gmail.com",
   "license": "MIT",
