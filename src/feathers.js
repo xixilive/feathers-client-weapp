@@ -1,5 +1,5 @@
 import feathers from '@feathersjs/client'
-import fetch from 'weapp-fetch'
+import fetch from '@xixilive/weapp-fetch'
 
 import storage from './storage'
 

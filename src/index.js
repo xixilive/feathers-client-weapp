@@ -1,4 +1,5 @@
 /* global App, Page */
+import fetch, {http, Logger} from '@xixilive/weapp-fetch'
 import feathers from './feathers'
 import storage from './storage'
 import bindApps from './bind'
@@ -13,5 +14,9 @@ export {
   feathers,
   storage,
   setup,
-  bindApps
+  bindApps,
+  
+  fetch,
+  http,
+  Logger
 }

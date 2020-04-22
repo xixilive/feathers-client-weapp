@@ -4,3 +4,5 @@
 .eslintrc
 .editorconfig
 __tests__
+src
+rollup.config.js

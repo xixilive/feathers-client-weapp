@@ -1,12 +1,19 @@
 ## To adapts feathers rest client for wechat mini-program 微信小程序
 
-[![Build Status](https://travis-ci.org/xixilive/feathers-client-weapp.svg?branch=master)](https://travis-ci.org/xixilive/feathers-client-weapp)
-![npm (scoped)](https://img.shields.io/npm/v/@feathers-weapp/client)
+![Travis (.org) branch](https://img.shields.io/travis/xixilive/feathers-client-weapp/master)
+![npm bundle size](https://img.shields.io/bundlephobia/min/@feathers-weapp/client)
+![npm version](https://img.shields.io/npm/v/@feathers-weapp/client)
+![Known Vulnerabilities](https://snyk.io/test/github/xixilive/feathers-client-weapp/badge.svg)
+![NPM license](https://img.shields.io/npm/l/@feathers-weapp/client)
 
-## Install
+## Installation
 
 ```sh
-npm i @feathers-weapp/client
+# 小程序开发者工具构建npm包时仅处理production依赖,因此要加`--save-prod`
+npm i @feathers-weapp/client --save-prod
+
+# or
+yarn add @feathers-weapp/client --save
 ```
 
 ## Usage
@@ -16,7 +23,7 @@ npm i @feathers-weapp/client
 ```js
 import {feathers} from '@feathers-weapp/client'
 
-const app = feathers('https://endpoint.api')
+const app = feathers('https://api.endpoint')
 
 app.authenticate({strategy: 'weapp', code: 'logincode', ...})
   .then(res => console.log('authenticated', res))
@@ -69,6 +76,13 @@ Page({
   }
 })
 ```
+
+## Build Tips
+
+This package was prebuilt as es module to `dist` folder, and all of source code not be transpiled to ES5 version.
+If you use this package's default build, you should turn on the `ES6 to ES5` option in devtools.
+If you want a custom build, please clone this repo.
+
 
 ## API
 
