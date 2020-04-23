@@ -1,5 +1,6 @@
 const app = {
-  onLaunch: jest.fn(() => {})
+  onLaunch: jest.fn(() => {}),
+  reAuthOnLaunch: true
 }
 
 const component = {

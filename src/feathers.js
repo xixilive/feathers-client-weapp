@@ -1,7 +1,12 @@
-import feathers from '@feathersjs/client'
+import feathers from '@feathersjs/feathers'
+import errors from '@feathersjs/errors'
+import authentication from '@feathersjs/authentication-client'
+import rest from '@feathersjs/rest-client'
 import fetch from '@xixilive/weapp-fetch'
-
 import storage from './storage'
+
+// code size optimized feathers client
+Object.assign(feathers, {errors, authentication, rest})
 
 const defaultOptions = {
   headers: {},

@@ -4,9 +4,11 @@ const createEmitter = feathersApp => {
       feathersApp.on(`weapp_${event}`, listener);
       return () => feathersApp.removeListener(`weapp_${event}`, listener)
     },
+
     once(event, listener){
       feathersApp.once(`weapp_${event}`, listener)
     },
+
     emit(event, data) {
       feathersApp.emit(`weapp_${event}`, data)
     }
@@ -41,6 +43,14 @@ const bindApps = (wxApp, wxPage, feathersApp) => {
     }
   })
 
+  Object.defineProperty(wxApp, 'emitter', {
+    configurable: false,
+    enumerable: false,
+    get(){
+      return emitter
+    }
+  })
+
   Object.defineProperty(wxApp, 'authentication', {
     configurable: false,
     enumerable: false,
@@ -69,15 +79,14 @@ const bindApps = (wxApp, wxPage, feathersApp) => {
 
     const {onLaunch: _onLaunch} = options
     const onLaunch = function(opts){
-      _onLaunch && _onLaunch(opts)
       emitter.once('authenticated', res => {
         Object.assign(authentication, {...res, authenticated: true})
       })
-      reAuthenticate()
+      options.reAuthOnLaunch && reAuthenticate()
+      _onLaunch && _onLaunch(opts)
     }
 
     wxApp({...options, onLaunch})
-    return true
   }
 }
 

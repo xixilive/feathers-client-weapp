@@ -32,7 +32,9 @@ app.service('something').once('created', data => console.log('created', data))
 app.service('something').create(data).then(res => console.log('created', res))
 ```
 
-### bind with wx App and Page
+### bind feathers app with wx App and Page
+
+> **NOTE**: bind API makes `code pollution` in `App` and `Page`
 
 ```js
 // in App.js
@@ -40,11 +42,13 @@ import {feathers, bindApps, setup} from '@feathers-weapp/client'
 const app = feathers('https://endpoint.api')
 
 // bind
-const setupWxApp = bindApps(App, Page, app)
-setupWxApp({
+const initApp = bindApps(App, Page, app)
+initApp({
   onLaunch(opts){
     // ...
-  }
+  },
+
+  reAuthOnLaunch: true // will cause automatic JWT authentication on app launch.
 })
 
 // or use shortcut
@@ -55,15 +59,22 @@ setup('https://endpoint.api', {
 })
 ```
 
-Once bind with App, you can use:
+Once bind with `App` and `Page`, you can use:
 
 - `App.feathers` to get the feathers app instance.
+- `App.emitter` to get an event emitter API, which delegated to the feathersjs's emitter.
 - `App.authentication` to get the current authentication state.
 - `Page.bindAuthentication` to bind authentication state with current page, bind `this.data.authentication`. 
 
 ```js
-// bindAuthentication example
-// somepage.js
+/* emitter example */
+const unsubscribe = App.emitter.on('event', () => {}) // subscribe
+unsubscribe() //unsubscribe, be careful
+
+App.emitter.once('event', () => {})
+App.emitter.emit('event', 'event data')
+
+/* bindAuthentication example */
 Page({
   onLoad(){
     Page.bindAuthentication(this)
@@ -87,7 +98,11 @@ If you want a custom build, please clone this repo.
 ## API
 
 ```js
-import {feathers, bindApps, setup, http, storage} from '@feather-weapp/client'
+// package's exports
+import {feathers, bindApps, setup, storage} from '@feather-weapp/client'
+
+// additional exports from @xixilive/weapp-fetch
+import {fetch, http, Logger } from '@feather-weapp/client'
 ```
 
 ### feathers function
@@ -108,13 +123,13 @@ interface feathersOptions {
 ### bindApps function
 
 ```ts
-function bindApps(app: WxApp, page: WxPage, fapp: FeathersApplication): Binder;
+function bindApps(app: WxApp, page: WxPage, fapp: FeathersApplication): InitApp;
 ```
 
-#### Binder function
+#### InitApp function
 
 ```ts
-function Binder(wxAppOptions: object): bool;
+function InitApp(wxAppOptions: object): void;
 ```
 
 ### setup function
@@ -123,33 +138,9 @@ function Binder(wxAppOptions: object): bool;
 function setup(feathersOptions: string | feathersOptions, wxAppOptions: object): bool;
 ```
 
-### http function
+### http/fetch/Logger functions
 
-```ts
-function http(base: string): httpInstance;
-interface httpInstance {
-  get(url: string, header?: any): Promise;
-  post(url: string, data?: any, header?: any): Promise;
-  put(url: string, data?: any, header?: any): Promise;
-  patch(url: string, data?: any, header?: any): Promise;
-  delete(url: string, header?: any): Promise;
-}
-```
-
-#### http.request function
-
-```ts
-function request(options: WxRequestOptions): Promise;
-```
-
-#### http.interpolators object
-
-```ts
-interface http.interpolators {
-  request(params: paramsObject): paramsObject;
-  response(res: Response): Response;
-}
-```
+see [@xixilive/weapp-fetch](https://github.com/xixilive/weapp-fetch)
 
 ### storage interface
 

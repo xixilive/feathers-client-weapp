@@ -6,8 +6,8 @@ import bindApps from './bind'
 
 const setup = (feathersOptions, wxAppOptions) => {
   const app = feathers(feathersOptions)
-  const bind = bindApps(App, Page, app)
-  return bind(wxAppOptions)
+  const initApp = bindApps(App, Page, app)
+  return initApp(wxAppOptions)
 }
 
 export {
