@@ -3,7 +3,7 @@ import errors from '@feathersjs/errors'
 import authentication from '@feathersjs/authentication-client'
 import rest from '@feathersjs/rest-client'
 import fetch from '@xixilive/weapp-fetch'
-import storage from './storage'
+import createStorage from './storage'
 
 // code size optimized feathers client
 Object.assign(feathers, {errors, authentication, rest})
@@ -15,6 +15,8 @@ const defaultOptions = {
 
 const createApp = function(options = {}) {
   const config = Object.assign({}, defaultOptions, ('string' === typeof options ? {endpoint: options} : options))
+
+  const storage = createStorage(wx) /* global wx */
   const rest = feathers.rest(config.endpoint).fetch(fetch, { headers: config.headers })
   const auth = feathers.authentication({ storage, storageKey: config.tokenStorageKey })
   const app = feathers().configure(rest).configure(auth)

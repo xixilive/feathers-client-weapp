@@ -1,5 +1,3 @@
-/* global wx */
-
 const promisify = (fn) => (options = {}) => {
   return new Promise((resolve, reject) => {
     fn({
@@ -10,7 +8,7 @@ const promisify = (fn) => (options = {}) => {
   })
 }
 
-export default {
+export default (wx) => ({
   getItem: wx.getStorageSync,
   setItem: wx.setStorageSync,
   removeItem: wx.removeStorageSync,
@@ -19,4 +17,4 @@ export default {
   setItemAsync: promisify(wx.setStorage),
   removeItemAsync: promisify(wx.removeStorage),
   clearAsync: promisify(wx.clearStorage)
-}
+})

@@ -1,4 +1,4 @@
-global.wx = (['get', 'set', 'remove', 'clear']).reduce((memo, op) => {
+const wx = (['get', 'set', 'remove', 'clear']).reduce((memo, op) => {
   memo[`${op}Storage`] = jest.fn(({success}) => success(true))
   memo[`${op}StorageSync`] = jest.fn(() => true)
   return memo;
@@ -6,9 +6,11 @@ global.wx = (['get', 'set', 'remove', 'clear']).reduce((memo, op) => {
 
 // in test case, use commonjs to make global.wx declaration works
 // the `import` syntx not works here
-const {default:storage} = require('../src/storage')
+const {default:createStorage} = require('../src/storage')
 
 describe('storage', () => {
+  const storage = createStorage(wx)
+
   it('sync methods', () => {
     expect(storage.getItem('key')).toEqual(true)
     expect(wx.getStorageSync).toHaveBeenCalledWith('key')
