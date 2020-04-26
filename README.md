@@ -1,10 +1,10 @@
 ## To adapts feathers rest client for wechat mini-program 微信小程序
 
-![Travis (.org) branch](https://img.shields.io/travis/xixilive/feathers-client-weapp/master)
-![npm bundle size](https://img.shields.io/bundlephobia/min/@feathers-weapp/client)
-![npm version](https://img.shields.io/npm/v/@feathers-weapp/client)
-![Known Vulnerabilities](https://snyk.io/test/github/xixilive/feathers-client-weapp/badge.svg)
-![NPM license](https://img.shields.io/npm/l/@feathers-weapp/client)
+[![Travis.org](https://img.shields.io/travis/xixilive/feathers-client-weapp/master)](https://travis-ci.org/github/xixilive/feathers-client-weapp)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@feathers-weapp/client)](https://www.npmjs.com/package/@feathers-weapp/client)
+[![npm version](https://img.shields.io/npm/v/@feathers-weapp/client)](https://www.npmjs.com/package/@feathers-weapp/client)
+[![Known Vulnerabilities](https://snyk.io/test/github/xixilive/feathers-client-weapp/badge.svg)](https://snyk.io/test/github/xixilive/feathers-client-weapp)
+[![NPM license](https://img.shields.io/npm/l/@feathers-weapp/client)](https://www.npmjs.com/package/@feathers-weapp/client)
 
 ## Installation
 
@@ -86,6 +86,18 @@ Page({
     }
   }
 })
+```
+
+### A simple storage wrapper
+
+window.localStorage compatiable API of wx storage functions, see `storage interface` in document.
+
+```js
+import {storage: createStorage} from '@feather-weapp/client'
+
+const storage = createStorage(wx)
+storage.getItem('key') // => value of key
+storage.getItemAsync('key').then(value => console.log(value))
 ```
 
 ## Build Tips
